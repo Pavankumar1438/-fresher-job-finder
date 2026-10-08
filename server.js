@@ -8,14 +8,18 @@ const PORT = process.env.PORT || 3000;
 const DOMAIN = process.env.SITE_URL || 'https://aimlprojectstarter.live';
 const DB = path.join(__dirname, 'data.json');
 
-// SAMPLE DATA - not real openings. Replace with real jobs later.
+// Real openings checked on 8 Oct 2026. Every listing below was opened and verified on its official page.
 const JOBS = [
-  { id: 1, title: 'Junior AI/ML Engineer (Sample)', company: 'Sample Tech Pvt Ltd', location: 'Bengaluru', type: 'Job', batch: '2025/2026', skills: ['Python', 'ML basics', 'NumPy'], desc: 'Sample listing for demo. Build and test simple ML models with a senior team.' },
-  { id: 2, title: 'Data Analyst Trainee (Sample)', company: 'Example Analytics', location: 'Hyderabad', type: 'Job', batch: '2025/2026', skills: ['SQL', 'Excel', 'Power BI'], desc: 'Sample listing for demo. Clean data and build dashboards.' },
-  { id: 3, title: 'Software Developer Fresher (Sample)', company: 'Demo Softwares', location: 'Chennai', type: 'Job', batch: '2026', skills: ['Java', 'DSA', 'Git'], desc: 'Sample listing for demo. Full-time role for 2026 CSE graduates.' },
-  { id: 4, title: 'Python Developer Intern (Sample)', company: 'Sample Labs', location: 'Remote', type: 'Internship', batch: '2026/2027', skills: ['Python', 'Flask', 'APIs'], desc: 'Sample listing for demo. 3-month remote internship.' },
-  { id: 5, title: 'Off-Campus Drive 2026 (Sample)', company: 'Sample Corp', location: 'Pan India', type: 'Off-Campus', batch: '2026', skills: ['Aptitude', 'Coding round'], desc: 'Sample listing for demo. Online test followed by interviews.' },
-  { id: 6, title: 'Walk-in Drive Graduate Trainee (Sample)', company: 'Example Services', location: 'Pune', type: 'Off-Campus', batch: '2024-2026', skills: ['Communication', 'Basic coding'], desc: 'Sample listing for demo. Walk-in with resume and ID.' }
+  { id: 1, title: 'Software Dev Engineer I (University Grad)', company: 'Amazon', location: 'Hyderabad / Bangalore / Chennai / Delhi / Pune', type: 'Job', batch: '2025/2026', skills: ['Python', 'Java', 'DSA'], desc: 'Full-time SDE I role for new graduates through Amazon University Talent Acquisition. Applications reviewed on a rolling basis.', apply: 'https://www.amazon.jobs/en/jobs/3105696/software-dev-engineer-i-amazon-university-talent-acquisition' },
+  { id: 2, title: 'SDE I Intern', company: 'Amazon', location: 'Pan India', type: 'Internship', batch: '2026', skills: ['Python', 'Java', 'DSA'], desc: 'Software development internship for 2026 graduates only. All Amazon India offices. Full-time commitment during the internship.', apply: 'https://www.amazon.jobs/en/jobs/3046606/sde-i-intern-amazon-university-talent-acquisition' },
+  { id: 3, title: 'AI / Machine Learning Engineer', company: 'Siemens Energy', location: 'Gurugram', type: 'Job', batch: '2024/2025/2026', skills: ['Python', 'PyTorch', 'LLMs', 'RAG'], desc: 'Fresher AI/ML role in the Digital Products and Solutions team. Python, ML pipelines, GenAI and RAG work.', apply: 'https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/298438' },
+  { id: 4, title: 'Junior AI Engineer', company: 'Trackmind', location: 'Hyderabad', type: 'Job', batch: '2024-2026', skills: ['Python', 'GenAI', 'LLMs'], desc: 'Work from office, 0-2 years. Build AI/ML and GenAI applications with Python, NumPy, Pandas and scikit-learn.', apply: 'https://jobs.lever.co/trackmind/ad66c0ec-1ae9-47cb-9d5d-83ae1cb6d200' },
+  { id: 5, title: 'AI/ML Trainee - Generative AI', company: 'WINIT', location: 'Hyderabad', type: 'Job', batch: '2024-2026', skills: ['Python', 'LangChain', 'RAG', 'AWS'], desc: 'CTC 2-3 LPA. Build GenAI automation with LangChain, LLMs and RAG on AWS. No experience needed. Apply by 25 Jan 2027.', apply: 'https://internshala.com/job/detail/fresher-ai-ml-trainee--generative-ai-job-in-hyderabad-at-winit1785457814' },
+  { id: 6, title: 'GenAI Developer', company: 'RecruitBots AI', location: 'Remote', type: 'Job', batch: '2024-2026', skills: ['Python', 'LLMs', 'GenAI'], desc: 'Work from home, CTC 3-8 LPA, 0-2 years. Build generative AI and LLM applications. Apply by 28 Oct 2026.', apply: 'https://internshala.com/job/detail/fresher-remote-genai-developer-job-at-recruitbots-ai1790605980' },
+  { id: 7, title: 'AI Engineer', company: 'Krutrim Insights', location: 'Delhi', type: 'Job', batch: '2025/2026', skills: ['Python', 'AI', 'GenAI'], desc: 'CTC 3-5.4 LPA, no experience needed, BTech/MTech/MCA students preferred. Training then client AI projects. Apply by 21 Oct 2026.', apply: 'https://internshala.com/job/detail/fresher-ai-engineer-job-in-delhi-at-krutrim-insights1788166470' },
+  { id: 8, title: 'Computer Vision Trainee', company: 'Miracle Eye Pvt Ltd', location: 'Remote', type: 'Job', batch: '2024-2026', skills: ['Python', 'OpenCV', 'Computer Vision'], desc: 'Work from home, CTC 2 LPA, 10 openings. Python, OpenCV and ML for image recognition. Apply by 16 Oct 2026.', apply: 'https://internshala.com/job/detail/fresher-remote-computer-vision-trainee-job-at-miracle-eye-pvt-ltd1789524457' },
+  { id: 9, title: 'AI with ML Intern (Fresher Job)', company: 'SkillSecureX', location: 'Remote', type: 'Job', batch: '2026/2027', skills: ['Python', 'NumPy', 'scikit-learn'], desc: 'Work from home, CTC 2-3 LPA. AI/ML model building, data preprocessing and projects. Apply by 9 Nov 2026.', apply: 'https://internshala.com/job/detail/fresher-remote-artificial-intelligecne-with-ml-intern-job-at-skillsecurex1778805024' },
+  { id: 10, title: 'AI/ML Engineer Trainee', company: 'Office Beacon ASPL', location: 'Vadodara (Hybrid)', type: 'Internship', batch: '2026/2027', skills: ['Python', 'APIs', 'NLP'], desc: '6-month internship, stipend 30-40k/month. Test AI outputs, prepare datasets, write Python scripts. Apply by 23 Oct 2026.', apply: 'https://internshala.com/internship/detail/ai-ml-engineer-trainee-fresher-internship-in-vadodara-at-office-beacon-aspl1790138662' }
 ];
 
 function readDb() { try { return JSON.parse(fs.readFileSync(DB, 'utf8')); } catch { return { subscribers: [], messages: [] }; } }
@@ -50,7 +54,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:14px}
 <input id="q" type="search" placeholder="Search Python, SQL, Bengaluru..." aria-label="Search jobs">
 <select id="type" aria-label="Job type"><option value="">All</option><option>Job</option><option>Internship</option><option>Off-Campus</option></select></div>
 <main>
-<section id="jobs"><h2>Latest Fresher Jobs</h2><p class="note">Sample data for project demo. Not real openings.</p><div id="list" class="grid" aria-live="polite"></div></section>
+<section id="jobs"><h2>Latest Fresher Jobs</h2><p class="note">Real openings checked on 8 Oct 2026. Deadlines change fast, apply early.</p><div id="list" class="grid" aria-live="polite"></div></section>
 <section id="guides"><h2>Resume &amp; Interview Guides</h2><div class="grid">
 <article class="card"><h3>Fresher Resume Format for CSE</h3><p>One page, projects first, skills section, GitHub link.</p></article>
 <article class="card"><h3>How to Get Your First AI/ML Job</h3><p>Build 2-3 projects, learn Python and SQL, apply off-campus.</p></article>
@@ -63,7 +67,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:14px}
 const list=document.getElementById('list'),q=document.getElementById('q'),type=document.getElementById('type');
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 async function load(){const r=await fetch('/api/jobs?q='+encodeURIComponent(q.value)+'&type='+encodeURIComponent(type.value));const d=await r.json();
-list.innerHTML=d.jobs.length?d.jobs.map(j=>'<article class="card"><h3>'+esc(j.title)+'</h3><div>'+esc(j.company)+' - '+esc(j.location)+'</div><div><span class="tag">'+esc(j.type)+'</span><span class="tag">Batch '+esc(j.batch)+'</span>'+j.skills.map(s=>'<span class="tag">'+esc(s)+'</span>').join('')+'</div><p>'+esc(j.desc)+'</p></article>').join(''):'<p>No jobs found.</p>'}
+list.innerHTML=d.jobs.length?d.jobs.map(j=>'<article class="card"><h3>'+esc(j.title)+'</h3><div>'+esc(j.company)+' - '+esc(j.location)+'</div><div><span class="tag">'+esc(j.type)+'</span><span class="tag">Batch '+esc(j.batch)+'</span>'+j.skills.map(s=>'<span class="tag">'+esc(s)+'</span>').join('')+'</div><p>'+esc(j.desc)+'</p><p><a href="'+esc(j.apply)+'" target="_blank" rel="noopener">Apply</a></p></article>').join(''):'<p>No jobs found.</p>'}
 q.addEventListener('input',load);type.addEventListener('change',load);load();
 async function send(form,url,msg){form.addEventListener('submit',async e=>{e.preventDefault();const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const d=await r.json();document.getElementById(msg).textContent=d.message||d.error;if(r.ok)form.reset()})}
 send(document.getElementById('sub'),'/api/subscribe','subMsg');send(document.getElementById('con'),'/api/contact','conMsg');
@@ -82,7 +86,7 @@ http.createServer(async (req, res) => {
   if (p === '/api/jobs' && req.method === 'GET') {
     const q = (u.searchParams.get('q') || '').toLowerCase(), t = u.searchParams.get('type') || '';
     const jobs = JOBS.filter(j => (!t || j.type === t) && (!q || (j.title + j.company + j.location + j.skills.join(' ')).toLowerCase().includes(q)));
-    return json(res, 200, { count: jobs.length, sample_data: true, jobs });
+    return json(res, 200, { count: jobs.length, sample_data: false, jobs });
   }
   const m = p.match(/^\/api\/jobs\/(\d+)$/);
   if (m && req.method === 'GET') { const j = JOBS.find(x => x.id == m[1]); return j ? json(res, 200, j) : json(res, 404, { error: 'Job not found' }); }
