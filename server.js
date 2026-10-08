@@ -31,13 +31,14 @@ const PAGE = `<!DOCTYPE html>
 <title>AIML Fresher Jobs - AI/ML &amp; CSE Fresher Jobs in India 2026</title>
 <meta name="description" content="Fresher jobs, internships and off-campus drives for AI/ML and CSE students in India, plus resume and interview guides.">
 <meta name="keywords" content="fresher jobs in India, AI ML fresher jobs, off campus drives 2026, software jobs for freshers">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2064%2064%22%3E%3Crect%20width=%2264%22%20height=%2264%22%20rx=%2214%22%20fill=%22%232563eb%22/%3E%3Cpath%20d=%22M14%2046%20L26%2020%20L38%2046%20M18.5%2037h15%22%20stroke=%22%23fff%22%20stroke-width=%225%22%20fill=%22none%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22/%3E%3Cpath%20d=%22M46%2046V20%22%20stroke=%22%23fff%22%20stroke-width=%225%22%20stroke-linecap=%22round%22/%3E%3Cpath%20d=%22M40%2027l6-8%206%208%22%20stroke=%22%23fbbf24%22%20stroke-width=%224%22%20fill=%22none%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 <link rel="canonical" href="${DOMAIN}/">
 <meta property="og:title" content="AIML Fresher Jobs"><meta property="og:description" content="AI/ML and CSE fresher jobs in India."><meta property="og:type" content="website"><meta property="og:url" content="${DOMAIN}/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AIML Fresher Jobs","url":"${DOMAIN}/"}</script>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;color:#1f2937;background:#f5f7fb}
 a{color:#2563eb}header{background:#1e3a8a;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
-header b{font-size:20px}nav a{color:#fff;margin-left:16px;text-decoration:none}
+header b{font-size:20px;display:flex;align-items:center;gap:10px}nav a{color:#fff;margin-left:16px;text-decoration:none}
 .hero{background:#2563eb;color:#fff;text-align:center;padding:48px 16px}.hero h1{margin:0 0 8px;font-size:32px}
 .hero input,.hero select{padding:12px;border:0;border-radius:6px;font-size:16px}.hero input{width:min(420px,90%)}
 main{max-width:1000px;margin:auto;padding:20px}section{margin:28px 0}
@@ -49,7 +50,7 @@ form{display:grid;gap:10px;max-width:420px}form input,form textarea{padding:10px
 button{background:#1e3a8a;color:#fff;border:0;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:15px}
 footer{text-align:center;padding:20px;color:#64748b;font-size:14px}
 </style></head><body>
-<header><b>AIML Fresher Jobs</b><nav><a href="#jobs">Jobs</a><a href="#guides">Guides</a><a href="#subscribe">Alerts</a><a href="#contact">Contact</a></nav></header>
+<header><b><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2563eb"/><path d="M14 46 L26 20 L38 46 M18.5 37h15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 46V20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M40 27l6-8 6 8" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>AIML Fresher Jobs</b><nav><a href="#jobs">Jobs</a><a href="#guides">Guides</a><a href="#subscribe">Alerts</a><a href="#contact">Contact</a></nav></header>
 <div class="hero"><h1>AI/ML &amp; CSE Fresher Jobs in India</h1><p>Jobs, internships, off-campus drives and career guides for freshers.</p>
 <input id="q" type="search" placeholder="Search Python, SQL, Bengaluru..." aria-label="Search jobs">
 <select id="type" aria-label="Job type"><option value="">All</option><option>Job</option><option>Internship</option><option>Off-Campus</option></select></div>
