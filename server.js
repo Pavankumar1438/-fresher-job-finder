@@ -72,7 +72,7 @@ main{max-width:1000px;margin:auto;padding:20px}section{margin:28px 0}
 .note{background:#fef9c3;border:1px solid #facc15;padding:8px 12px;border-radius:6px;font-size:14px}
 form{display:grid;gap:10px;max-width:420px}form input,form textarea{padding:10px;border:1px solid #cbd5e1;border-radius:6px;font:inherit}
 button{background:#1e3a8a;color:#fff;border:0;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:15px}
-footer{text-align:center;padding:20px;color:#64748b;font-size:14px}
+footer{text-align:center;padding:20px;color:#475569;font-size:14px}
 </style></head><body>
 <header><b><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2563eb"/><path d="M14 46 L26 20 L38 46 M18.5 37h15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 46V20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M40 27l6-8 6 8" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>AIML Fresher Jobs</b><nav><a href="#jobs">Jobs</a><a href="#guides">Guides</a><a href="#subscribe">Alerts</a><a href="#contact">Contact</a></nav></header>
 <div class="hero"><h1>AI/ML &amp; CSE Fresher Jobs in India</h1><p>Jobs, internships, off-campus drives and career guides for freshers.</p>
