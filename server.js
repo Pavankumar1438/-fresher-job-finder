@@ -9,6 +9,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const DOMAIN = process.env.SITE_URL || 'https://aimlprojectstarter.live';
 const DB = path.join(__dirname, 'data.json');
+const SECURITY_HEADERS = { 'X-Frame-Options': 'DENY', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'Cross-Origin-Opener-Policy': 'same-origin', 'Permissions-Policy': 'camera=(), microphone=(), geolocation=()' };
 
 // Real openings checked on 8 Oct 2026. Every listing below was opened and verified on its official page.
 const JOBS = [
@@ -99,7 +100,7 @@ send(document.getElementById('sub'),'/api/subscribe','subMsg');send(document.get
 
 function sendPublic(req,res,text,type){
  const etag='"'+crypto.createHash('sha256').update(text).digest('hex')+'"';
- const headers={'Content-Type':type,'Cache-Control':'public, max-age=60, must-revalidate','ETag':etag,'Vary':'Accept-Encoding','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'};
+ const headers={...SECURITY_HEADERS,'Content-Type':type,'Cache-Control':'public, max-age=60, must-revalidate','ETag':etag,'Vary':'Accept-Encoding','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'};
  if(req.headers['if-none-match']===etag){res.writeHead(304,headers);return res.end()}
  let bytes=Buffer.from(text);
  if(/\bgzip\b/.test(req.headers['accept-encoding']||'')){bytes=zlib.gzipSync(bytes);headers['Content-Encoding']='gzip'}
@@ -120,7 +121,7 @@ function guidePage(g){
  .replace(/<script>[^]*?<\/script>/g,'').replace(/href="#/g,'href="/#');
 }
 
-function json(res, code, obj) { res.writeHead(code, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store', 'X-Content-Type-Options':'nosniff' }); res.end(JSON.stringify(obj)); }
+function json(res, code, obj) { res.writeHead(code, { ...SECURITY_HEADERS, 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store', 'X-Content-Type-Options':'nosniff' }); res.end(JSON.stringify(obj)); }
 function body(req) { return new Promise(ok => { let b = ''; req.on('data', c => { b += c; if (b.length > 1e5) req.destroy(); }); req.on('end', () => { try { ok(JSON.parse(b || '{}')); } catch { ok({}); } }); }); }
 const okEmail = e => typeof e === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && e.length < 200;
 
