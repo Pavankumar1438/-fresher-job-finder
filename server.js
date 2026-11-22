@@ -52,6 +52,8 @@ const GUIDES = [
 const renderJobs = jobs => jobs.map(j => '<article class="card"><h3>'+esc(j.title)+'</h3><div>'+esc(j.company)+' - '+esc(j.location)+'</div><div><span class="tag">'+esc(j.type)+'</span><span class="tag">Batch '+esc(j.batch)+'</span>'+j.skills.map(s=>'<span class="tag">'+esc(s)+'</span>').join('')+'</div><p>'+esc(j.desc)+'</p><p><a href="'+esc(j.apply)+'" target="_blank" rel="noopener">Apply on source site</a></p></article>').join('');
 const PAGE = `<!DOCTYPE html>
 <html lang="en"><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3JYX35ZRJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-M3JYX35ZRJ');</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AIML Fresher Jobs - AI/ML &amp; CSE Fresher Jobs in India 2026</title>
 <meta name="description" content="Fresher jobs, internships and off-campus drives for AI/ML and CSE students in India, plus resume and interview guides.">
@@ -150,6 +152,7 @@ http.createServer(async (req, res) => {
     return json(res, 200, { message: 'Message sent. Thank you!' });
   }
   if (p === '/robots.txt' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,'User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: '+DOMAIN+'/sitemap.xml\n','text/plain; charset=utf-8');
+  if (p === '/googlee52a5c4fd4f895eb.html') return sendPublic(req,res,'google-site-verification: googlee52a5c4fd4f895eb.html','text/html; charset=utf-8');
   if (p === '/sitemap.xml' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['/',...GUIDES.map(g=>'/guides/'+g.slug)].map(x=>'<url><loc>'+esc(DOMAIN+x)+'</loc></url>').join('')+'</urlset>','application/xml; charset=utf-8');
   json(res, 404, { error: 'Not found' });
 }).listen(PORT, () => console.log('Running on http://localhost:' + PORT));
