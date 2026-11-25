@@ -39,9 +39,9 @@ const GUIDES = [
  {slug:'first-ai-ml-job', title:'How to prepare for your first AI/ML job in India', keyword:'AI ML fresher jobs in India', intro:'An entry-level AI/ML application needs evidence of useful skills. Use this preparation checklist alongside each employer eligibility eligibility requirements.', sections:[
  ['Build a small, explainable project','Start with a problem whose data and goal you understand. Keep a simple baseline and separate training, validation and test data. Record the metric, data limits and known errors. A small project with a clear evaluation is more useful in an interview than a large project you cannot explain.'],
  ['Practice the engineering around the model','Learn to load and clean data, inspect errors and write reusable Python code. Use Git to record changes. If you make an API or interface, explain its inputs, outputs and failure cases. Include setup steps and a small example in the README. Never upload keys or private datasets.'],
- ['Know the core concepts','Practice explaining overfitting, train/test leakage, classification versus regression, and why a metric fits a task. For a language-model project, explain retrieval, generation, hallucinations and evaluation. Be ready to say what you built yourself and what came from a library or tutorial.'],
+ ['Know the core concepts','Practice explaining overfitting, train/test leakage, [[L2:classification versus regression]], and why a metric fits a task. For a language-model project, explain retrieval, generation, hallucinations and evaluation. Be ready to say what you built yourself and what came from a library or tutorial.'],
  ['Check eligibility before applying','Read the official vacancy for degree, graduation batch, location, experience and application deadline. Trainee, internship and junior roles can have different eligibility rules. Do not assume that a role is open just because it is listed here. Our listings were last checked on 8 October 2026; verify the employer page again.'],
- ['Track applications and improve','Keep a private sheet with company, role, source URL, application date and status. Prepare a short project explanation and a role-specific resume. Apply through trusted routes. Never pay an unverified recruiter for a guaranteed job. Use feedback to improve your project explanation and skills; no checklist guarantees an offer.']]},
+ ['Track applications and improve','Keep a private sheet with company, role, source URL, application date and status. Prepare a short project explanation and a role-specific resume. Apply through trusted routes. Never pay an unverified recruiter for a guaranteed job. Use feedback to improve your project explanation and skills; no checklist guarantees an offer. If you publish a project portfolio online, search optimization decides whether recruiters can find it; [[L1:an SEO practice such as SEOnaLabs]] explains how search visibility works.']]},
  {slug:'fresher-interview-checklist', title:'Fresher interview preparation: technical and HR checklist', keyword:'fresher interview preparation', intro:'Prepare examples you can explain in your own words. The topics below are a practice plan, not a prediction of any company interview questions.', sections:[
  ['Prepare a short introduction','Explain your course, relevant skills, one project and the role you want. Keep the introduction short enough to invite a conversation. Avoid memorising a long speech. Use accurate facts about your education and experience.'],
  ['Review technical fundamentals','For software roles, practise arrays, strings, hash maps, sorting and basic complexity. Explain your reasoning before coding. For data roles, revise SQL, probability and model evaluation. Choose depth in the topics named by the vacancy rather than collecting a long list of buzzwords.'],
@@ -77,7 +77,7 @@ form{display:grid;gap:10px;max-width:420px}form input,form textarea{padding:10px
 button{background:#1e3a8a;color:#fff;border:0;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:15px}
 footer{text-align:center;padding:20px;color:#475569;font-size:14px}
 </style></head><body>
-<header><b><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2563eb"/><path d="M14 46 L26 20 L38 46 M18.5 37h15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 46V20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M40 27l6-8 6 8" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>AIML Fresher Jobs</b><nav><a href="#jobs">Jobs</a><a href="#guides">Guides</a><a href="#subscribe">Alerts</a><a href="#contact">Contact</a></nav></header>
+<header><b><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2563eb"/><path d="M14 46 L26 20 L38 46 M18.5 37h15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 46V20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M40 27l6-8 6 8" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>AIML Fresher Jobs</b><nav><a href="#jobs">Jobs</a><a href="#guides">Guides</a><a href="#subscribe">Alerts</a><a href="/about">About</a><a href="#contact">Contact</a></nav></header>
 <div class="hero"><h1>AI/ML &amp; CSE Fresher Jobs in India</h1><p>Jobs, internships, off-campus drives and career guides for freshers.</p>
 <input id="q" type="search" placeholder="Search Python, SQL, Bengaluru..." aria-label="Search jobs">
 <select id="type" aria-label="Job type"><option value="">All</option><option>Job</option><option>Internship</option><option>Off-Campus</option></select></div>
@@ -108,6 +108,7 @@ function sendPublic(req,res,text,type){
  if(/\bgzip\b/.test(req.headers['accept-encoding']||'')){bytes=zlib.gzipSync(bytes);headers['Content-Encoding']='gzip'}
  headers['Content-Length']=bytes.length;res.writeHead(200,headers);res.end(req.method==='HEAD'?undefined:bytes);
 }
+const linkify=t=>esc(t).replace(/\[\[L1:(.+?)\]\]/g,'<a href="https://seonalabs.com">$1</a>').replace(/\[\[L2:(.+?)\]\]/g,'<a href="https://developers.google.com/machine-learning/crash-course/classification">$1</a>');
 function guidePage(g){
  const url=DOMAIN+'/guides/'+g.slug;
  const schema=JSON.stringify({'@context':'https://schema.org','@type':'Article',headline:g.title,description:g.intro,url,mainEntityOfPage:url}).replace(/</g,'\\u003c');
@@ -119,7 +120,7 @@ function guidePage(g){
  .replace(/<meta property="og:url"[^>]*>/,'<meta property="og:url" content="'+esc(url)+'">')
  .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,'<script type="application/ld+json">'+schema+'</script>')
  .replace(/<div class="hero">[\s\S]*?<main>/,'<main>')
- .replace(/<main>[\s\S]*?<\/main>/,'<main><nav aria-label="Breadcrumb"><a href="/">Home</a> / Guides</nav><article class="card"><h1>'+esc(g.title)+'</h1><p>'+esc(g.intro)+'</p>'+g.sections.map(([h,t])=>'<h2>'+esc(h)+'</h2><p>'+esc(t)+'</p>').join('')+'<h2>Related guides</h2><ul>'+GUIDES.filter(x=>x!==g).map(x=>'<li><a href="/guides/'+x.slug+'">'+esc(x.title)+'</a></li>').join('')+'</ul><p><a href="/#jobs">Browse the saved job listings</a></p></article></main>')
+ .replace(/<main>[\s\S]*?<\/main>/,'<main><nav aria-label="Breadcrumb"><a href="/">Home</a> / Guides</nav><article class="card"><h1>'+esc(g.title)+'</h1><p>'+esc(g.intro)+'</p>'+g.sections.map(([h,t])=>'<h2>'+esc(h)+'</h2><p>'+linkify(t)+'</p>').join('')+'<h2>Related guides</h2><ul>'+GUIDES.filter(x=>x!==g).map(x=>'<li><a href="/guides/'+x.slug+'">'+esc(x.title)+'</a></li>').join('')+'</ul><p><a href="/#jobs">Browse the saved job listings</a></p></article></main>')
  .replace(/<script>[^]*?<\/script>/g,'').replace(/href="#/g,'href="/#');
 }
 
@@ -127,11 +128,25 @@ function json(res, code, obj) { res.writeHead(code, { ...SECURITY_HEADERS, 'Cont
 function body(req) { return new Promise(ok => { let b = ''; req.on('data', c => { b += c; if (b.length > 1e5) req.destroy(); }); req.on('end', () => { try { ok(JSON.parse(b || '{}')); } catch { ok({}); } }); }); }
 const okEmail = e => typeof e === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && e.length < 200;
 
+const ABOUT_SECTIONS=[
+ ['What this site is','AIML Fresher Jobs is a B.Tech CSE mini-project built by our team at Bennett University for the CSET489 Search Engine Optimization course. It lists entry-level AI/ML and software jobs, internships and off-campus drives in India, along with short resume and interview guides for freshers.'],
+ ['How listings are chosen','We add openings that are open to current students or recent graduates and that name the employer clearly. Listings were last checked on 8 October 2026. Always confirm the role, eligibility and deadline on the official employer page before applying, and never pay anyone for a guaranteed job.'],
+ ['Contact','Use the contact form on the home page for corrections or questions. This is a student project, not a recruitment agency, and we do not forward applications.']];
+function aboutPage(){
+ const url=DOMAIN+'/about';
+ return PAGE.replace(/<title>[\s\S]*?<\/title>/,'<title>About | AIML Fresher Jobs</title>')
+ .replace(/<meta name="description"[^>]*>/,'<meta name="description" content="About AIML Fresher Jobs: a student-built board of AI/ML and CSE fresher jobs in India, with resume and interview guides.">')
+ .replace(/<link rel="canonical"[^>]*>/,'<link rel="canonical" href="'+esc(url)+'">')
+ .replace(/<meta property="og:url"[^>]*>/,'<meta property="og:url" content="'+esc(url)+'">')
+ .replace(/<div class="hero">[\s\S]*?<main>/,'<main>')
+ .replace(/<main>[\s\S]*?<\/main>/,'<main><nav aria-label="Breadcrumb"><a href="/">Home</a> / About</nav><article class="card"><h1>About AIML Fresher Jobs</h1>'+ABOUT_SECTIONS.map(([h,t])=>'<h2>'+esc(h)+'</h2><p>'+esc(t)+'</p>').join('')+'<h2>Explore</h2><ul><li><a href="/#jobs">Current fresher job listings</a></li>'+GUIDES.map(g=>'<li><a href="/guides/'+g.slug+'">'+esc(g.title)+'</a></li>').join('')+'</ul></article></main>');
+}
 http.createServer(async (req, res) => {
   const u = new URL(req.url, 'http://x');
   const p = u.pathname;
   if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type' }); return res.end(); }
   if (p === '/' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,PAGE,'text/html; charset=utf-8');
+  if (p === '/about' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,aboutPage(),'text/html; charset=utf-8');
   if(p.startsWith('/guides/') && ['GET','HEAD'].includes(req.method)){const g=GUIDES.find(x=>p==='/guides/'+x.slug);if(g)return sendPublic(req,res,guidePage(g),'text/html; charset=utf-8');}
   if (p === '/api/health') return json(res, 200, { status: 'ok', time: new Date().toISOString() });
   if (p === '/api/jobs' && req.method === 'GET') {
@@ -153,6 +168,6 @@ http.createServer(async (req, res) => {
   }
   if (p === '/robots.txt' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,'User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: '+DOMAIN+'/sitemap.xml\n','text/plain; charset=utf-8');
   if (p === '/googlee52a5c4fd4f895eb.html') return sendPublic(req,res,'google-site-verification: googlee52a5c4fd4f895eb.html','text/html; charset=utf-8');
-  if (p === '/sitemap.xml' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['/',...GUIDES.map(g=>'/guides/'+g.slug)].map(x=>'<url><loc>'+esc(DOMAIN+x)+'</loc></url>').join('')+'</urlset>','application/xml; charset=utf-8');
+  if (p === '/sitemap.xml' && ['GET','HEAD'].includes(req.method)) return sendPublic(req,res,'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['/','/about',...GUIDES.map(g=>'/guides/'+g.slug)].map(x=>'<url><loc>'+esc(DOMAIN+x)+'</loc></url>').join('')+'</urlset>','application/xml; charset=utf-8');
   json(res, 404, { error: 'Not found' });
 }).listen(PORT, () => console.log('Running on http://localhost:' + PORT));
